@@ -1,0 +1,16 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-jwt
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: jwt_example
+      PGDATA: /data/postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_volume:/data/postgres
+volumes:
+  postgres_volume:
