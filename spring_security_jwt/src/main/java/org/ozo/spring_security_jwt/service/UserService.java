@@ -6,21 +6,26 @@ import org.ozo.spring_security_jwt.entity.User;
 import org.ozo.spring_security_jwt.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; // Repository to interact with the database
+    private final AuthenticationService authenticationService; // Service to handle authentication
 
-    public void createUser(String username, String password) {
-         userRepository.save(new User(null, username, password));
+    public UserResponseDto getUser(String authHeader) { // Method to get user details
+        return authenticationService.findUserByAuth(authHeader);
     }
 
-    public UserResponseDto getUser(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
-        UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setUsername(user.map(User::getUsername).orElse(null));
-        return userResponseDto;
+    public List<UserResponseDto> getUsers() { // Method to get all users
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            return List.of();
+        } else {
+            return users.stream()
+                    .map(UserResponseDto::new)
+                    .toList();
+        }
     }
 }
