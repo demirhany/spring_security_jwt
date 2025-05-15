@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: jwt_example
+      POSTGRES_DB: jwt_security
       PGDATA: /data/postgres
     ports:
       - 5432:5432
