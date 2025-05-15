@@ -15,6 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * JwtService is a service class that provides methods for generating, validating,
+ * and extracting information from JSON Web Tokens (JWTs).
+ * It uses a secret key to sign the tokens and includes expiration handling.
+ */
+
 @Service
 public class JwtService {
     @Value("${security.jwt.key}")
