@@ -5,12 +5,12 @@ services:
     container_name: postgres-jwt
     restart: unless-stopped
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: jwt_security
-      PGDATA: /data/postgres
     ports:
       - 5432:5432
     volumes:
-      - postgres_volume:/data/postgres
+      - postgres_volume:/var/lib/postgresql/data
 volumes:
   postgres_volume:
